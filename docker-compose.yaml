@@ -17,3 +17,13 @@ services:
       - "3000:3000"
     links:
       - db
+
+  frontend:
+    build: ./frontend/
+    command: npm run dev
+    volumes:
+      - ./frontend:/frontend
+    ports:
+      - "8080:8080"
+    links:
+      - backend
