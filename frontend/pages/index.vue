@@ -1,22 +1,41 @@
 <template>
-  <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">frontend2</h1>
-      <h2 class="subtitle">My super-duper Nuxt.js project</h2>
-      <h1>{{ name }}</h1>
+  <section class="hero is-medium">
+    <div class="hero-body">
+      <div class="container">
+        <nav class="panel">
+          <p class="panel-heading ">
+            Todo
+          </p>
+          <div class="panel-block">
+            <p class="control has-icons-left">
+              <input class="input" type="text" placeholder="Create Todo" />
+              <span class="icon is-left">
+                <i class="fas fa-search" aria-hidden="true"></i>
+              </span>
+            </p>
+          </div>
+          <a class="panel-block" v-for="user in users" :key="user.name">
+            <span class="panel-icon">
+              <i class="fas fa-book" aria-hidden="true"></i>
+            </span>
+            {{ user.name }}
+          </a>
+          <div class="panel-block">
+            <button class="button is-link is-outlined is-fullwidth">
+              CREATE
+            </button>
+          </div>
+        </nav>
+      </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
-import Logo from "~/components/Logo.vue";
 import axios from "axios";
 
 export default {
-  components: {
-    Logo
-  },
+  components: {},
   data() {
     return {
       results: []
@@ -27,41 +46,8 @@ export default {
     const getUrl = encodeURI(baseUrl);
     const response = await app.$axios.$get(getUrl);
     return {
-      name: response.user.name
+      users: response.users
     };
   }
 };
 </script>
-
-<style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
-</style>
