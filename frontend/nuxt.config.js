@@ -38,7 +38,8 @@ export default {
   modules: [
     // Doc: https://github.com/nuxt-community/modules/tree/master/packages/bulma
     "@nuxtjs/bulma",
-    "@nuxtjs/axios"
+    "@nuxtjs/axios",
+    "@nuxtjs/apollo"
   ],
 
   axios: {},
@@ -57,5 +58,13 @@ export default {
      ** You can extend webpack config here
      */
     extend(config, ctx) {}
+  },
+  // ★ ここから追記
+  apollo: {
+    clientConfigs: {
+      default: {
+        httpEndpoint: "http://backend:3000/graphql"
+      }
+    }
   }
 };

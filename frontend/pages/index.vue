@@ -18,7 +18,7 @@
             <span class="panel-icon">
               <i class="fas fa-book" aria-hidden="true"></i>
             </span>
-            {{ user.name }}
+            {{ user.email }}
           </a>
           <div class="panel-block">
             <button class="button is-link is-outlined is-fullwidth">
@@ -32,22 +32,25 @@
 </template>
 
 <script>
-import axios from "axios";
+import gql from "graphql-tag";
 
 export default {
   components: {},
   data() {
     return {
-      results: []
+      users: []
     };
   },
-  async asyncData({ app }) {
-    const baseUrl = "http://backend:3000/home/index";
-    const getUrl = encodeURI(baseUrl);
-    const response = await app.$axios.$get(getUrl);
-    return {
-      users: response.users
-    };
+  apollo: {
+    users: gql`
+      query users {
+        users {
+          id
+          name
+          email
+        }
+      }
+    `
   }
 };
 </script>
